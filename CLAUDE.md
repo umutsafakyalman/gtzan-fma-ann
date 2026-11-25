@@ -25,6 +25,10 @@ eğitilmiş model yok). Kod ve kullanım ayrıntıları `README.md` içinde.
   test segment **%79,3**, parça **%83,0**. En iyi: classical, hiphop, blues (10/10).
   En zayıf: disco 5/10, rock 6/10, pop 7/10 (birbirine karışıyor).
   Bu çalıştırma eski kodla yapıldığı için `last_model.pt` yok.
+- **FMA small, 4 tür** (`outputs/fma_4sinif/`, `Hip-Hop,Rock,Electronic,Folk`, width 32,
+  batch 128, Mac M1 MPS, 37 epoch'ta erken durdu, en iyi epoch 27, val segment %81,4):
+  test segment **%76,0**, parça **%80,0** (400 parça). Parça recall: Hip-Hop 92, Electronic 85,
+  Rock 81, Folk 62. Ana hata: Folk→Rock (31/100). Epoch ~5 dk (MPS, şarjda), bataryada ~8 dk.
 - Hendrix "Who Knows" (canlı, funk-rock) denendi → model reggae/hiphop dedi. Açıklama: GTZAN'da
   funk sınıfı yok, 83 BPM funk groove'u reggae/hiphop ritmine benziyor, domain shift.
   Raporda "Sınırlılıklar" için iyi örnek.
@@ -49,7 +53,17 @@ python extract_features.py --dataset fma_small    # uzun sürer (Windows'ta ~1 s
   `/Applications/Python 3.x/Install Certificates.command` çalıştır.
 - Sınıf seçimi B (FMA medium) olursa fma_small indirmeye gerek yok, medium small'u da içerir.
 
-## Durum / yarım kalanlar
+## Mac kurulumu yapıldı (2026-11-25)
+- Klasör: `~/Desktop/gtzan-fma`, venv `.venv` (python.org 3.13 arm64, torch 2.15, MPS True).
+- SSL hatası `SSL_CERT_FILE=$(.venv/bin/python -c "import certifi;print(certifi.where())")` ile aşıldı.
+- `data/gtzan`, `data/fma` (fma_small) indirildi; `features/gtzan` ve `features/fma_small` üretildi
+  (sayılar Windows'takiyle aynı). Eski GTZAN modeli Mac özniteliklerinde yine %79,3 / %83,0 verdi.
+- Mac: Apple M1, **8 GB RAM**. batch 256 belleğe sığmayıp swap'a düşüyor, fp16 autocast hız
+  kazandırmıyor → **batch 128, fp32** kullan. FMA medium diske sığmıyor (~44 GB tepe, ~30 GB boş).
+- Kullanıcı sınıf seçimi olarak **A (4 tür)** seçti; eğitim + test tamamlandı (yukarıda).
+- Sonuç beğenilmezse önerilen: AdamW + OneCycle/cosine, weight decay 1e-2, EMA (koda henüz eklenmedi).
+
+## Durum / yarım kalanlar (Windows'tan kalan notlar)
 - `features/fma_small/` Windows'ta hazırdı ama Mac'e taşınmadı; yukarıdaki adımlarla yeniden üret.
   FMA small sınıfları: Electronic, Experimental, Folk, Hip-Hop, Instrumental, International, Pop, Rock.
 - **FMA ile henüz eğitim yapılmadı.** Kullanıcı Windows'ta GPU kullanamadı (AMD RX 7700 XT,

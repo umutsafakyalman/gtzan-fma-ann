@@ -1,0 +1,57 @@
+Sınıflar (4): ['Hip-Hop', 'Rock', 'Electronic', 'Folk']
+Eğitim segmenti: 30086 | Doğrulama segmenti: 3769 | cihaz: mps
+Model parametre sayısı: 1,304,996
+Epoch   1 | train loss 1.3780 acc 0.463 | val loss 0.9531 acc 0.648 (parça 0.672) | lr 1.0e-03 | 319s
+   -> en iyi model kaydedildi (val acc 0.648)
+Epoch   2 | train loss 1.0779 acc 0.577 | val loss 0.8034 acc 0.682 (parça 0.718) | lr 1.0e-03 | 316s
+   -> en iyi model kaydedildi (val acc 0.682)
+Epoch   3 | train loss 0.9960 acc 0.644 | val loss 0.8221 acc 0.666 (parça 0.677) | lr 1.0e-03 | 304s
+Epoch   4 | train loss 0.9430 acc 0.693 | val loss 0.7850 acc 0.695 (parça 0.703) | lr 1.0e-03 | 318s
+   -> en iyi model kaydedildi (val acc 0.695)
+Epoch   5 | train loss 0.9004 acc 0.723 | val loss 0.6789 acc 0.732 (parça 0.745) | lr 1.0e-03 | 339s
+   -> en iyi model kaydedildi (val acc 0.732)
+Epoch   6 | train loss 0.8738 acc 0.737 | val loss 0.6614 acc 0.767 (parça 0.805) | lr 1.0e-03 | 314s
+   -> en iyi model kaydedildi (val acc 0.767)
+Epoch   7 | train loss 0.8564 acc 0.750 | val loss 0.6403 acc 0.769 (parça 0.787) | lr 1.0e-03 | 310s
+   -> en iyi model kaydedildi (val acc 0.769)
+Epoch   8 | train loss 0.8327 acc 0.764 | val loss 0.7121 acc 0.727 (parça 0.767) | lr 1.0e-03 | 313s
+Epoch   9 | train loss 0.8279 acc 0.762 | val loss 0.6652 acc 0.745 (parça 0.785) | lr 1.0e-03 | 312s
+Epoch  10 | train loss 0.8146 acc 0.772 | val loss 0.6142 acc 0.777 (parça 0.802) | lr 1.0e-03 | 313s
+   -> en iyi model kaydedildi (val acc 0.777)
+Epoch  11 | train loss 0.8022 acc 0.778 | val loss 0.6845 acc 0.736 (parça 0.760) | lr 1.0e-03 | 312s
+Epoch  12 | train loss 0.7980 acc 0.780 | val loss 0.5918 acc 0.789 (parça 0.797) | lr 1.0e-03 | 316s
+   -> en iyi model kaydedildi (val acc 0.789)
+Epoch  13 | train loss 0.7770 acc 0.794 | val loss 0.6158 acc 0.764 (parça 0.780) | lr 1.0e-03 | 320s
+Epoch  14 | train loss 0.7742 acc 0.793 | val loss 0.6841 acc 0.750 (parça 0.767) | lr 1.0e-03 | 334s
+Epoch  15 | train loss 0.7598 acc 0.801 | val loss 0.5719 acc 0.795 (parça 0.828) | lr 1.0e-03 | 303s
+   -> en iyi model kaydedildi (val acc 0.795)
+Epoch  16 | train loss 0.7539 acc 0.803 | val loss 0.5634 acc 0.789 (parça 0.800) | lr 1.0e-03 | 304s
+Epoch  17 | train loss 0.7453 acc 0.810 | val loss 0.5760 acc 0.791 (parça 0.818) | lr 1.0e-03 | 342s
+Epoch  18 | train loss 0.7382 acc 0.812 | val loss 0.5888 acc 0.778 (parça 0.792) | lr 1.0e-03 | 359s
+Epoch  19 | train loss 0.7280 acc 0.818 | val loss 0.6311 acc 0.771 (parça 0.782) | lr 5.0e-04 | 433s
+Epoch  20 | train loss 0.7087 acc 0.831 | val loss 0.5659 acc 0.801 (parça 0.818) | lr 5.0e-04 | 494s
+   -> en iyi model kaydedildi (val acc 0.801)
+Epoch  21 | train loss 0.6959 acc 0.837 | val loss 0.5374 acc 0.809 (parça 0.835) | lr 5.0e-04 | 491s
+   -> en iyi model kaydedildi (val acc 0.809)
+Epoch  22 | train loss 0.6879 acc 0.841 | val loss 0.5367 acc 0.813 (parça 0.833) | lr 5.0e-04 | 489s
+   -> en iyi model kaydedildi (val acc 0.813)
+Epoch  23 | train loss 0.6840 acc 0.843 | val loss 0.5878 acc 0.789 (parça 0.812) | lr 5.0e-04 | 486s
+Epoch  24 | train loss 0.6816 acc 0.844 | val loss 0.5293 acc 0.809 (parça 0.840) | lr 5.0e-04 | 483s
+Epoch  25 | train loss 0.6721 acc 0.849 | val loss 0.5459 acc 0.805 (parça 0.825) | lr 5.0e-04 | 490s
+Epoch  26 | train loss 0.6647 acc 0.854 | val loss 0.5563 acc 0.810 (parça 0.825) | lr 2.5e-04 | 489s
+Epoch  27 | train loss 0.6474 acc 0.863 | val loss 0.5468 acc 0.814 (parça 0.840) | lr 2.5e-04 | 498s
+   -> en iyi model kaydedildi (val acc 0.814)
+Epoch  28 | train loss 0.6369 acc 0.869 | val loss 0.5612 acc 0.812 (parça 0.838) | lr 2.5e-04 | 385s
+Epoch  29 | train loss 0.6398 acc 0.866 | val loss 0.5558 acc 0.810 (parça 0.830) | lr 2.5e-04 | 239s
+Epoch  30 | train loss 0.6326 acc 0.872 | val loss 0.5712 acc 0.796 (parça 0.818) | lr 2.5e-04 | 247s
+Epoch  31 | train loss 0.6299 acc 0.873 | val loss 0.5604 acc 0.806 (parça 0.833) | lr 1.3e-04 | 279s
+Epoch  32 | train loss 0.6166 acc 0.879 | val loss 0.5480 acc 0.813 (parça 0.845) | lr 1.3e-04 | 281s
+Epoch  33 | train loss 0.6160 acc 0.880 | val loss 0.5556 acc 0.810 (parça 0.848) | lr 1.3e-04 | 281s
+Epoch  34 | train loss 0.6110 acc 0.881 | val loss 0.5654 acc 0.803 (parça 0.833) | lr 1.3e-04 | 283s
+Epoch  35 | train loss 0.6073 acc 0.885 | val loss 0.5664 acc 0.807 (parça 0.833) | lr 6.3e-05 | 293s
+Epoch  36 | train loss 0.6050 acc 0.884 | val loss 0.5573 acc 0.809 (parça 0.835) | lr 6.3e-05 | 289s
+Epoch  37 | train loss 0.5985 acc 0.889 | val loss 0.5689 acc 0.809 (parça 0.838) | lr 6.3e-05 | 293s
+Erken durdurma: 10 epoch boyunca iyileşme yok.
+Eğitim bitti. En iyi doğrulama doğruluğu: 0.814
+Model: /Users/umut/Desktop/gtzan-fma/outputs/fma_4sinif/best_model.pt
+Test sonuçları için: python evaluate.py --dataset fma_small --run fma_4sinif

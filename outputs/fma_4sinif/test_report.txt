@@ -1,0 +1,30 @@
+Veri seti: fma_small | split: test | model: best (epoch 27)
+Segment sayısı: 3777 | Parça sayısı: 400
+
+SEGMENT (3 sn) doğruluğu : 0.7596
+PARÇA (30 sn) doğruluğu  : 0.8000
+
+--- Segment bazında rapor ---
+              precision    recall  f1-score   support
+
+     Hip-Hop      0.849     0.875     0.862       941
+        Rock      0.647     0.794     0.713       947
+  Electronic      0.798     0.760     0.779       943
+        Folk      0.772     0.610     0.682       946
+
+    accuracy                          0.760      3777
+   macro avg      0.767     0.760     0.759      3777
+weighted avg      0.766     0.760     0.759      3777
+
+--- Parça bazında rapor ---
+              precision    recall  f1-score   support
+
+     Hip-Hop      0.893     0.920     0.906       100
+        Rock      0.675     0.810     0.736       100
+  Electronic      0.833     0.850     0.842       100
+        Folk      0.827     0.620     0.709       100
+
+    accuracy                          0.800       400
+   macro avg      0.807     0.800     0.798       400
+weighted avg      0.807     0.800     0.798       400
+

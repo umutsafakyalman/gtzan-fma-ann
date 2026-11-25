@@ -15,6 +15,7 @@ import numpy as np
 import torch
 
 import config
+import model_inspect as mi
 from audio_features import segment_melspecs
 from common import Normalizer, get_device, load_checkpoint, predict_proba
 
@@ -98,6 +99,33 @@ def classify(audio_path, model_name):
     return summary, label, timeline_plot(seg_proba, classes), spectrogram_plot(mels)
 
 
+def inspect(audio_path, model_name, seg_no):
+    """'Modelin içi' sekmesi: seçilen 3 sn'lik segment için katmanlar ve nöronlar."""
+    if not audio_path:
+        raise gr.Error("Önce bir ses dosyası yükleyin ya da kayıt yapın.")
+    if model_name not in MODELS:
+        raise gr.Error("Model bulunamadı. Önce train.py ile model eğitin.")
+    model, ckpt, norm = get_model(model_name)
+    mels = segment_melspecs(audio_path, max_segments=None, max_duration=300.0)
+    if mels is None:
+        raise gr.Error("Ses okunamadı ya da 3 saniyeden kısa.")
+    i = min(max(int(seg_no), 1), len(mels)) - 1
+
+    res = mi.inspect_segment(model, norm, mels[i], ckpt["classes"], DEVICE)
+    cls = ckpt["classes"][res["pred"]]
+    s0 = i * config.SEGMENT_SECONDS
+    note = "" if int(seg_no) - 1 == i else f" (şarkıda {len(mels)} segment var, sonuncusu gösteriliyor)"
+    header = (
+        f"### Segment {i + 1}/{len(mels)} ({s0:.0f}–{s0 + config.SEGMENT_SECONDS:.0f}. sn) → "
+        f"**{cls}** (%{100 * res['proba'][res['pred']]:.1f}){note}\n"
+        "Aşağıdaki tablo bu segment modelden geçerken her katmanda kaç nöronun aktifleştiğini "
+        "(ReLU çıktısı > 0) gösterir. *Nöron* = katman çıktısındaki her bir değer.\n\n"
+        + mi.layer_table(model, res)
+    )
+    return (header, mi.gradcam_plot(res), mi.featuremap_plot(res),
+            mi.dense_plot(model, res), mi.filters_plot(model))
+
+
 def example_files():
     """Örnek olarak GTZAN TEST setinden (modelin hiç görmediği) her türden bir parça."""
     try:
@@ -126,18 +154,39 @@ with gr.Blocks(title="Müzik Türü Sınıflandırma") as demo:
                              label="Ses dosyası (wav, mp3, au, ...)")
             model_dd = gr.Dropdown(choices=list(MODELS), value=next(iter(MODELS), None),
                                    label="Model (eğitildiği veri seti)")
-            btn = gr.Button("Türü tahmin et", variant="primary")
+        with gr.Column(scale=1):
             ex = example_files()
             if ex:
                 gr.Examples(ex, inputs=[audio],
                             label="Örnekler (GTZAN test seti, modelin görmediği parçalar)")
-        with gr.Column(scale=1):
-            summary = gr.Markdown()
-            label = gr.Label(num_top_classes=5, label="Tür olasılıkları")
-    timeline = gr.Plot(label="Zamana göre tahmin")
-    spec = gr.Plot(label="Spektrogram")
+
+    with gr.Tabs():
+        with gr.Tab("Tahmin"):
+            btn = gr.Button("Türü tahmin et", variant="primary")
+            with gr.Row():
+                summary = gr.Markdown()
+                label = gr.Label(num_top_classes=5, label="Tür olasılıkları")
+            timeline = gr.Plot(label="Zamana göre tahmin")
+            spec = gr.Plot(label="Spektrogram")
+
+        with gr.Tab("Modelin içi (katmanlar ve nöronlar)"):
+            gr.Markdown(
+                "Şarkının seçilen 3 saniyelik segmenti modelden geçirilir ve her katmanda olanlar "
+                "gösterilir: aktif nöron sayıları, Grad-CAM (model nereye bakıyor), evrişim "
+                "filtrelerinin çıktıları, gizli katmandaki 256 nöron ve ilk katmanın öğrenilmiş filtreleri."
+            )
+            with gr.Row():
+                seg_no = gr.Slider(1, 100, value=1, step=1, label="Segment no (1 = ilk 3 sn)")
+                ibtn = gr.Button("Modelin içini göster", variant="primary")
+            itable = gr.Markdown()
+            icam = gr.Plot(label="Grad-CAM — model nereye bakıyor?")
+            ifmap = gr.Plot(label="Evrişim katmanlarının çıktıları (feature map)")
+            idense = gr.Plot(label="Gizli katman nöronları ve çıktı")
+            ifilt = gr.Plot(label="İlk katmanın öğrenilmiş filtreleri")
 
     btn.click(classify, inputs=[audio, model_dd], outputs=[summary, label, timeline, spec])
+    ibtn.click(inspect, inputs=[audio, model_dd, seg_no],
+               outputs=[itable, icam, ifmap, idense, ifilt])
 
 if __name__ == "__main__":
     if not MODELS:

@@ -152,6 +152,11 @@ python app.py
 - **Örnekler** listesindeki dosyalar GTZAN test setindendir; model bunları eğitimde hiç görmedi.
 - Birden fazla model eğitildiyse (ör. `gtzan` ve `fma_small`) açılır listeden seçilebilir.
 - En fazla ilk 5 dakika incelenir.
+- **Modelin içi (katmanlar ve nöronlar)** sekmesi seçilen 3 sn'lik segment için ağın içini gösterir
+  (`model_inspect.py`): katman bazında nöron / aktif nöron / parametre tablosu, Grad-CAM (modelin
+  karar verirken spektrogramın neresine baktığı), her evrişim bloğunda en çok aktifleşen filtrelerin
+  çıktıları, gizli katmandaki 256 nöron ile tahmine en çok katkı veren nöronlar ve ilk katmanın
+  öğrenilmiş 3×3 filtreleri.
 
 Sonuçlar `outputs/<dataset>/` klasörüne yazılır:
 
