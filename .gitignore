@@ -1,0 +1,18 @@
+# Veri setleri ve çıkarılmış öznitelikler (büyük; download_data.py + extract_features.py ile üretilir)
+data/
+features/
+
+# Python / ortam
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Diğer
+*.zip
+*.part
+last_model.pt
+*.tmp
+.claude/
+.DS_Store
+features_fma_log.txt

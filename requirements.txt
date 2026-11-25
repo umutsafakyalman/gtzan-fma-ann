@@ -1,0 +1,9 @@
+torch>=2.2
+librosa>=0.10
+soundfile>=0.12
+numpy
+pandas
+scikit-learn
+matplotlib
+tqdm
+gradio
